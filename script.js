@@ -30,16 +30,19 @@ musicaFocoInput.addEventListener('change', () => {
 });
 
 focoBt.addEventListener('click', () => {
+    tempoDecorridoEmSegundos = 1500;
     alterarContexto('foco');
     focoBt.classList.add('active');
 });
 
 curtoBt.addEventListener('click', () => {
+    tempoDecorridoEmSegundos = 300;
     alterarContexto('descanso-curto');
     curtoBt.classList.add('active');
 }) 
 
 longoBt.addEventListener('click', () => {
+    tempoDecorridoEmSegundos = 900;
     alterarContexto('descanso-longo');
     longoBt.classList.add('active');
 }) 
@@ -50,6 +53,9 @@ function alterarContexto(contexto) {
     });
     html.setAttribute('data-contexto', contexto);
     banner.setAttribute('src', `./imagens/${contexto}.png`);
+
+    mostrarTempo();
+
         switch (contexto) {
             case "foco":
                 titulo.innerHTML = `Otimize sua produtividade,<br>
@@ -109,7 +115,7 @@ function mostrarTempo() {
         minute: '2-digit',
         second: '2-digit'
     });
-    tempoNaTela.innerHTML = `${tempoFormatado}`;
+    tempoNaTela.textContent = tempoFormatado;
 }
 
 mostrarTempo();
