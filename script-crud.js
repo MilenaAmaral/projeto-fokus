@@ -26,6 +26,11 @@ function criarElementoTarefa(tarefa) {
     const botao = document.createElement('button')
     botao.classList.add('app__button-edit');
 
+    botao.onclick = () => {
+        const novaDescricao = prompt("Qual é a nova descrição da tarefa?", tarefa.descricao);
+        paragrafo.textContent = novaDescricao;
+}
+
     const imagemBotao = document.createElement('img')
     imagemBotao.setAttribute('src', '/imagens/edit.png')
     botao.append(imagemBotao)
