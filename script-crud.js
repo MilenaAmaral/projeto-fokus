@@ -7,7 +7,7 @@ const paragrafoDescricaoTarefa = document.querySelector(".app__section-active-ta
 const btnRemoverConcluidas = document.querySelector("#btn-remover-concluidas");
 const btnRemoverTodas = document.querySelector("#btn-remover-todas");
 
-const tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
+let tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
 let tarefaSelecionada = null;
 let liTarefaSelecionada = null;
 
@@ -97,25 +97,44 @@ formAdicionarTarefa.addEventListener("submit", (evento) => {
 
 tarefas.forEach((tarefa) => {
     const elementoTarefa = criarElementoTarefa(tarefa);
+
+    if (tarefa.completa) {
+        elementoTarefa.classList.add('app__section-task-list-item-complete');
+        elementoTarefa.querySelector('button').setAttribute('disabled', 'disabled');
+    }
+
     ulTarefas.append(elementoTarefa);
-});  
+});
 
 document.addEventListener('focoFinalizado', () => {
     if (tarefaSelecionada && liTarefaSelecionada) {
+        tarefaSelecionada.completa = true;
+
         liTarefaSelecionada.classList.remove('app__section-task-list-item-active');
         liTarefaSelecionada.classList.add('app__section-task-list-item-complete');
         liTarefaSelecionada.querySelector('button').setAttribute('disabled', 'disabled');
+
+        atualizarLocalStorage();
     }
-})
+});
 
 const removerTarefasConcluidas = (somenteCompletas) => {
-    const seletor = somenteCompletas ? '.app__section-task-list-item-complete' : '.app__section-task-list-item';
+    const seletor = somenteCompletas
+        ? '.app__section-task-list-item-complete'
+        : '.app__section-task-list-item';
+
     document.querySelectorAll(seletor).forEach(elemento => {
-        elemento.remove()
+        elemento.remove();
     });
-    tarefas = tarefas.filter(tarefa => !tarefa.completa)
+
+    if (somenteCompletas) {
+        tarefas = tarefas.filter(tarefa => !tarefa.completa);
+    } else {
+        tarefas.length = 0;
+    }
+
     atualizarLocalStorage();
-}
+};
 
 btnRemoverConcluidas.onclick = () => removerTarefasConcluidas(true);
 btnRemoverTodas.onclick = () => removerTarefasConcluidas(false);
