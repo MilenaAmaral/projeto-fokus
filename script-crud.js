@@ -78,6 +78,7 @@ function criarElementoTarefa(tarefa) {
 
 btnAdicionarTarefa.addEventListener("click", () => {
     formAdicionarTarefa.classList.toggle("hidden");
+    formAdicionarTarefa.setAttribute("aria-hidden", formAdicionarTarefa.classList.contains("hidden"));
 });
 
 formAdicionarTarefa.addEventListener("submit", (evento) => {
