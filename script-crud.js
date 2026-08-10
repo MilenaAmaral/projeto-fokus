@@ -78,7 +78,20 @@ function criarElementoTarefa(tarefa) {
 
 btnAdicionarTarefa.addEventListener("click", () => {
     formAdicionarTarefa.classList.toggle("hidden");
+    formAdicionarTarefa.setAttribute("aria-hidden", formAdicionarTarefa.classList.contains("hidden"));
 });
+
+const btnCancelarTarefa = document.querySelector(".app__form-footer__button--cancel");
+const btnDeletarTarefa = document.querySelector(".app__form-footer__button--delete");
+
+function fecharFormularioTarefa() {
+    formAdicionarTarefa.classList.add("hidden");
+    formAdicionarTarefa.setAttribute("aria-hidden", "true");
+    textarea.value = "";
+}
+
+btnCancelarTarefa.addEventListener("click", fecharFormularioTarefa);
+btnDeletarTarefa.addEventListener("click", fecharFormularioTarefa);
 
 formAdicionarTarefa.addEventListener("submit", (evento) => {
     evento.preventDefault();
