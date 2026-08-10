@@ -30,22 +30,22 @@ musicaFocoInput.addEventListener('change', () => {
 });
 
 focoBt.addEventListener('click', () => {
+    zerar(); 
     tempoDecorridoEmSegundos = 1500;
     alterarContexto('foco');
-    focoBt.classList.add('active');
 });
 
 curtoBt.addEventListener('click', () => {
+    zerar();
     tempoDecorridoEmSegundos = 300;
     alterarContexto('descanso-curto');
-    curtoBt.classList.add('active');
 }) 
 
 longoBt.addEventListener('click', () => {
+    zerar();
     tempoDecorridoEmSegundos = 900;
     alterarContexto('descanso-longo');
-    longoBt.classList.add('active');
-}) 
+})
 
 function alterarContexto(contexto) {
     botoes.forEach(function (botao) {
