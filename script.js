@@ -51,6 +51,8 @@ function alterarContexto(contexto) {
     botoes.forEach(function (botao) {
         botao.classList.remove('active');
     });
+    const botaoDoContexto = document.querySelector(`[data-contexto="${contexto}"]`);
+    if (botaoDoContexto) botaoDoContexto.classList.add('active');
     html.setAttribute('data-contexto', contexto);
     banner.setAttribute('src', `./imagens/${contexto}.png`);
 
