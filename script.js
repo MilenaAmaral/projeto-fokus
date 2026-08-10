@@ -86,6 +86,11 @@ const contagemRegressiva = () => {
             document.dispatchEvent(evento);
         }   
         zerar();
+    
+        const contextoAtual = html.getAttribute('data-contexto');
+        const tempos = { 'foco': 1500, 'descanso-curto': 300, 'descanso-longo': 900 };
+        tempoDecorridoEmSegundos = tempos[contextoAtual];
+        mostrarTempo();
         return;
     }
     tempoDecorridoEmSegundos -= 1;
